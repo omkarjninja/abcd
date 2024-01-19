@@ -1,0 +1,77 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+struct node
+{
+ int data;
+ struct node *left,*right;
+};
+class BST
+{
+ private:
+ public: struct node *root;
+  BST(){root=NULL;}
+         void constructBST(int);
+         void traverse(struct node *);
+};
+void BST::constructBST(int d)
+{
+ struct node *nn;
+ nn= new struct node;
+ nn->data=d;
+ nn->left=nn->right=NULL;
+ if(root==NULL)
+ {
+  root=nn;
+  return;
+ }
+ else
+ {
+  struct node *t;
+  struct node *curr;
+  t=root;
+  if(t->data<nn->data)
+  {
+   while(t!=NULL)
+   {
+    curr=t;
+    t=t->right;
+   }
+   curr->right=nn;
+   return;
+  }
+  else
+  {
+   while(t!=NULL)
+   {
+    curr=t;
+    t=t->left;
+   }
+   curr->left=nn;
+   return;
+  }
+ }
+}
+
+void BST::traverse(struct node *rptr)
+{
+if(rptr == NULL) return;
+    cout<<rptr->data<<"\n";
+    traverse(rptr->left);
+    traverse(rptr->right);
+   
+}
+int main()
+{
+ BST b;
+ b.constructBST(11);
+ b.constructBST(20);
+ b.constructBST(10);
+ b.constructBST(5);
+ b.constructBST(8);
+ b.constructBST(12);
+ b.constructBST(15);
+ b.constructBST(11);
+ b.traverse(b.root);
+ return 0;
+}
